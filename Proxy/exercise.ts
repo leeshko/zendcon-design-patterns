@@ -3,7 +3,7 @@ interface ImageInterface {
 }
 
 class CustomImage implements ImageInterface {
-    protected filename;
+    protected filename: string;
     constructor(filename: string) {
         this.filename = filename;
         this.loadFromDisk();
@@ -12,7 +12,7 @@ class CustomImage implements ImageInterface {
         console.log(`Loading ${this.filename}`);
     }
     display() {
-        console.log(`Display ${this.filename}`);
+        return `Display ${this.filename}`;
     }
 }
 
