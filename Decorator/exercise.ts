@@ -4,7 +4,7 @@ interface HtmlElement {
 }
 
 export class InputText implements HtmlElement {
-    protected name;
+    protected name: string;
     constructor(name: string) {
         this.name = name;
     }
@@ -23,8 +23,8 @@ abstract class HtmlDecorator implements HtmlElement {
 }
 
 export class LabelDecorator extends HtmlDecorator {
-    protected label;
-    setLabel(label) {
+    protected label?: string;
+    setLabel(label: string) {
         this.label = label;
     }
     toString() {
@@ -34,27 +34,11 @@ export class LabelDecorator extends HtmlDecorator {
 }
 
 export class ErrorDecorator extends HtmlDecorator {
-    protected error;
-    setError(message) {
+    protected error?: string;
+    setError(message: string) {
         this.error = message;
     }
     toString() {
-        return `<div>${this.element.toString()} <span>${this.error}</span></div>`;
+        return `${this.element.toString()} <span>${this.error}</span>`;
     }
 }
-
-const input = new InputText('nickname');
-console.log(`InputText without decorator: ${input}`);
-
-const labelled = new LabelDecorator(input);
-labelled.setLabel('Nickname:');
-console.log(`InputText with LabelDecorator:${labelled}`);
-
-const error = new ErrorDecorator(input);
-error.setError('You must enter a unique nickname');
-console.log(`InputText with ErrorDecorator:${error}`);
-
-// Label + Error
-const labelledError = new ErrorDecorator(labelled);
-labelledError.setError('You must enter a unique nickname');
-console.log(`InputText with LabelDecorator and ErrorDecorator:${labelledError}`);
