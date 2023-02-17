@@ -1,9 +1,9 @@
 interface HtmlElement {
-    __toString(): string;
+    toString(): string;
     getName(): string;
 }
 
-class InputText implements HtmlElement {
+export class InputText implements HtmlElement {
     protected name;
     constructor(name: string) {
         this.name = name;
@@ -11,7 +11,7 @@ class InputText implements HtmlElement {
     getName() {
         return this.name;
     }
-    __toString() {
+    toString() {
         return `<input type="text" id="${this.name}" name="${this.name}" />`;
     }
 }
@@ -22,29 +22,24 @@ abstract class HtmlDecorator implements HtmlElement {
     // @todo here the code to implement
 }
 
-class LabelDecorator extends HtmlDecorator {
+export class LabelDecorator extends HtmlDecorator {
     protected label;
     setLabel(label) {
         this.label = label;
     }
-    __toString() {
+    toString() {
         const name = this.getName();
-        return `
-            <label for="${name}">${this.label}</label>
-            ${this.element.__toString()}
-        `;
+        return `<label for="${name}">${this.label}</label> ${this.element.toString()}`;
     }
 }
 
-class ErrorDecorator extends HtmlDecorator {
+export class ErrorDecorator extends HtmlDecorator {
     protected error;
     setError(message) {
         this.error = message;
     }
-    __toString() {
-        return `
-            ${this.element.__toString()}<span>${this.error}</span>
-        `;
+    toString() {
+        return `<div>${this.element.toString()} <span>${this.error}</span></div>`;
     }
 }
 

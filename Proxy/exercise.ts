@@ -2,9 +2,9 @@ interface ImageInterface {
     display(): void;
 }
 
-class Image implements ImageInterface {
+class CustomImage implements ImageInterface {
     protected filename;
-    constructor(filename) {
+    constructor(filename: string) {
         this.filename = filename;
         this.loadFromDisk();
     }
