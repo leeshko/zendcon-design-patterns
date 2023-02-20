@@ -1,27 +1,53 @@
-class PayPal {
+export class PayPal {
    constructor(private email: string, private password: string) {}
 
-    transfer(email: string, amount: string) {
-        return `Paypal: ${amount} successfully transferred to ${email}!`;
+    transfer(email: string, amount: number) {
+        // validation process is omitted for simplicity
+        return 'Paypal: success!';
     }
 }
 
-class CreditCard {
+export class CreditCard {
     constructor(private number: string, private expiration: string) {}
 
     authorizeTransaction(amount: number) {
-        return `Authorization code for amount ${amount}: 234da`;
+        // validation process is omitted for simplicity
+        return 'Authorization: success';
     }
 }
 
-interface PaymentAdapterInterface {
-    collectMoney(amount: number): boolean;
+interface Product {
+    id: number;
+    price: number;
+    value: string;
+}
+export class Merchant {
+    private goods: Product[] = [
+        {
+            id: 1,
+            price: 100,
+            value: 'product'
+        }
+    ];
+    constructor(protected payment: PaymentInterface) {}
+
+    sell(productId: number): string {
+        const product = this.goods.find(({id}) => id === productId);
+        if (!product) throw Error('Product not found');
+
+        if (this.payment.collectMoney(product.price)) return product.value;
+        throw Error('Payment failed');
+    }
 }
 
-class CrediCardAdapter implements PaymentAdapterInterface {
-
+interface PaymentInterface {
+    // todo: here the code to implement
 }
 
-class PayPalAdapter implements PaymentAdapterInterface {
+export class CreditCardAdapter implements PaymentInterface {
+    // todo: here the code to implement
+}
 
+export class PayPalAdapter implements PaymentInterface {
+    // todo: here the code to implement
 }
