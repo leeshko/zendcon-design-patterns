@@ -18,6 +18,17 @@ export class CustomImage implements ImageInterface {
 
 export class ProxyImage implements ImageInterface {
     protected image;
+    protected proxyImg: string;
 
     // @todo here the code to implement
+    constructor(proxyImg: string){
+        this.proxyImg = proxyImg;
+    }
+
+    display(): void {
+        if(!this.image) {
+            this.image = new CustomImage(this.proxyImg);
+        }
+        return this.image.display()
+    }
 }
