@@ -55,7 +55,7 @@ describe('Adapter pattern', () => {
         it('should call payment processor payment method', () => {
             merchant.sell(TEST_PRODUCT.id);
             expect(payPalPaymentSpy).toHaveBeenCalledTimes(1);
-            expect(payPalPaymentSpy).toHaveBeenCalledWith('payments@merchant.shop', TEST_PRODUCT.price);
+            expect(payPalPaymentSpy).toHaveBeenCalledWith('user@email.test', TEST_PRODUCT.price);
         });
     });
 });
