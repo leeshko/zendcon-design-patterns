@@ -47,12 +47,11 @@ export class PayPal {
  
  export class CreditCardAdapter implements PaymentInterface {
      // todo: here the code to implement
-     private creditCard: CreditCard;
-     constructor(creditCard: CreditCard){
+     constructor(private creditCard: CreditCard){
          this.creditCard = creditCard
      }
      collectMoney(price: number) {
-         const result = this.creditCard?.authorizeTransaction(price);
+         const result = this.creditCard.authorizeTransaction(price);
          return result === 'Authorization: success'
      }
  }
@@ -64,7 +63,7 @@ export class PayPal {
          this.payPal = payPal
      }
      collectMoney(price: number) {
-         const result = this.payPal?.transfer(this.payPal.email, price)
+         const result = this.payPal.transfer('payments@merchant.shop', price)
          return result === 'Paypal: success!'
      }
  }
