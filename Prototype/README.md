@@ -1,7 +1,7 @@
 Prototype
 =========
 
-The prototype pattern is a creational design pattern. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+The [prototype pattern](https://refactoring.guru/ru/design-patterns/prototype) is a creational design pattern. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
 
 Definition
 ----------
