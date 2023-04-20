@@ -1,6 +1,12 @@
 import { ProductCreator, ProductInterface } from './shopping-cart-framework'
 export class ProductCatalogA extends ProductCreator {
-    // todo: here the code to implement
+    constructor(private catalogDb: ProductCatalogDB){
+        super()
+        this.catalogDb = catalogDb
+    }
+    public createProduct(code: string): ProductInterface {
+        return new MyShopProduct(this.catalogDb[code], code)
+    }
 }
 
 interface ProductCatalogDB {
@@ -8,5 +14,15 @@ interface ProductCatalogDB {
 }
 
 export class MyShopProduct implements ProductInterface {
-    // todo: here the code to implement
+    constructor(private description: string, private code: string){
+        this.description = description;
+        this.code = code;
+    }
+        getShopDescription() {
+            return this.description
+        }
+        getShopProductCode() {
+            return this.code
+        }
+    
 }
