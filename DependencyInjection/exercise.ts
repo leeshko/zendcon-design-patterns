@@ -32,10 +32,10 @@ export class Database<T> {
     throw Error("Invalid ID");
   }
 
-  addNewRecord(item: T): DBIndexType {
+  addNewRecord(item: T): DBRecord<T> {
     const _id = uuid();
     this.state.push({ ...item, _id });
-    return _id;
+    return ({ ...item, _id });
   }
 }
 
@@ -46,4 +46,14 @@ export class UsersManager<T> {
   }
 }
 
-export class ProductsListManager<T> {}
+export class ProductsListManager<T> {
+  constructor(private productsDB: Database<T>){
+    this.productsDB = productsDB
+  }
+  addItem(item: T){
+    return this.productsDB.addNewRecord(item)
+  }
+  getItem(id: DBIndexType){
+    return this.productsDB.getByID(id)
+  }
+}
